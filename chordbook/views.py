@@ -3,10 +3,23 @@ from .models import Artist, Song
 from django.views.generic import ListView, DetailView, CreateView
 from django.urls import reverse_lazy, reverse
 
-class SongListView(ListView):
+class ArtistCreateView(CreateView):
+    model = Artist
+    fields = ['name']
+    template_name = 'chordbook/artist_form.html'
+    success_url = reverse_lazy('song-list')
+
+class ArtistListView(ListView):
+    model = Artist
+    template_name = 'chordbook/artist_list.html'
+    context_object_name = 'artists'
+    queryset = Artist.objects.prefetch_related('songs').all()
+
+class SongCreateView(CreateView):
     model = Song
-    template_name = 'chordbook/song_list.html'
-    context_object_name = 'songs'
+    fields = ['artist', 'title', 'progression']
+    template_name = 'chordbook/song_form.html'
+    success_url = reverse_lazy('song-list')
 
 class SongDetailView(DetailView):
     model = Song
@@ -25,20 +38,7 @@ class SongDetailView(DetailView):
         context['back_url'] = back_url
         return context
 
-class SongCreateView(CreateView):
+class SongListView(ListView):
     model = Song
-    fields = ['artist', 'title', 'progression']
-    template_name = 'chordbook/song_form.html'
-    success_url = reverse_lazy('song-list')
-
-class ArtistCreateView(CreateView):
-    model = Artist
-    fields = ['name']
-    template_name = 'chordbook/artist_form.html'
-    success_url = reverse_lazy('song-list')
-
-class ArtistListView(ListView):
-    model = Artist
-    template_name = 'chordbook/artist_list.html'
-    context_object_name = 'artists'
-    queryset = Artist.objects.prefetch_related('songs').all()
+    template_name = 'chordbook/song_list.html'
+    context_object_name = 'songs'
