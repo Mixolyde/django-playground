@@ -15,7 +15,7 @@ class SongDetailView(DetailView):
 
 class SongCreateView(CreateView):
     model = Song
-    fields = ['title', 'artist', 'progression']
+    fields = ['artist', 'title', 'progression']
     template_name = 'chordbook/song_form.html'
     success_url = reverse_lazy('song-list')
 
