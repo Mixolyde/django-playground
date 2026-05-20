@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Artist, Song
 from django.views.generic import ListView, DetailView, CreateView
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 
 class SongListView(ListView):
     model = Song
@@ -12,6 +12,18 @@ class SongDetailView(DetailView):
     model = Song
     template_name = 'chordbook/song_detail.html'
     context_object_name = 'song'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        from_source = self.request.GET.get('from')
+        
+        if from_source == 'artists':
+            back_url = reverse('artist-list')
+        else:
+            back_url = reverse('song-list')
+            
+        context['back_url'] = back_url
+        return context
 
 class SongCreateView(CreateView):
     model = Song

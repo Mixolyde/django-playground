@@ -19,7 +19,7 @@
                 <ul class="list-group list-group-flush">
                     {% for song in artist.songs.all %}
                     <li class="list-group-item">
-                        <a href="{% url 'song-detail' song.pk %}">{{ song.title }}</a>
+                        <a href="{% url 'song-detail' song.pk %}?from=artists">{{ song.title }}</a>
                     </li>
                     {% endfor %}
                 </ul>
