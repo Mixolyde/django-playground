@@ -24,3 +24,9 @@ class ArtistCreateView(CreateView):
     fields = ['name']
     template_name = 'chordbook/artist_form.html'
     success_url = reverse_lazy('song-list')
+
+class ArtistListView(ListView):
+    model = Artist
+    template_name = 'chordbook/artist_list.html'
+    context_object_name = 'artists'
+    queryset = Artist.objects.prefetch_related('songs').all()
