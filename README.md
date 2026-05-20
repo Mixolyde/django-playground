@@ -56,3 +56,8 @@ To run the project's tests, use the following command:
 - **Song Repository**: Store song titles and their chord progressions.
 - **Clean UI**: Responsive design using Bootstrap.
 - **Admin Interface**: Built-in Django admin for data management.
+
+## Screenshots
+
+### Song Detail View
+![Song Detail View](readme_media/song_detail.png)
