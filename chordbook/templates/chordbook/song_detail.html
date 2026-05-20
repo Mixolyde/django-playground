@@ -19,5 +19,6 @@
 
 <div class="mt-4">
     <a href="{{ back_url }}" class="btn btn-outline-secondary">Back to List</a>
+    <a href="{% url 'song-edit' song.pk %}" class="btn btn-primary">Edit Song</a>
 </div>
 {% endblock %}

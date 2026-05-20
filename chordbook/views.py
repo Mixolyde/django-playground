@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Artist, Song
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.urls import reverse_lazy, reverse
 
 class ArtistCreateView(CreateView):
@@ -42,3 +42,11 @@ class SongListView(ListView):
     model = Song
     template_name = 'chordbook/song_list.html'
     context_object_name = 'songs'
+
+class SongUpdateView(UpdateView):
+    model = Song
+    fields = ['artist', 'title', 'progression']
+    template_name = 'chordbook/song_form.html'
+
+    def get_success_url(self):
+        return reverse('song-detail', kwargs={'pk': self.object.pk})
