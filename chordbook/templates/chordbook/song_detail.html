@@ -1,0 +1,23 @@
+{% extends 'chordbook/base.html' %}
+
+{% block title %}{{ song.title }} - {{ song.artist.name }}{% endblock %}
+
+{% block content %}
+<div class="mb-4">
+    <h1>{{ song.title }}</h1>
+    <h3 class="text-muted">by {{ song.artist.name }}</h3>
+</div>
+
+<div class="card">
+    <div class="card-header bg-secondary text-white">
+        Chord Progression
+    </div>
+    <div class="card-body">
+        <pre class="progression">{{ song.progression }}</pre>
+    </div>
+</div>
+
+<div class="mt-4">
+    <a href="{% url 'song-list' %}" class="btn btn-outline-secondary">Back to List</a>
+</div>
+{% endblock %}

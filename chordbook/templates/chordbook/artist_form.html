@@ -1,0 +1,13 @@
+{% extends 'chordbook/base.html' %}
+
+{% block title %}Add Artist{% endblock %}
+
+{% block content %}
+<h1>Add Artist</h1>
+<form method="post" class="mt-4">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Save Artist</button>
+    <a href="{% url 'song-list' %}" class="btn btn-link">Cancel</a>
+</form>
+{% endblock %}
